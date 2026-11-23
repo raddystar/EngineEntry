@@ -1,0 +1,44 @@
+# Dependencies from CAB Files
+
+## DLLs and Resources
+
+### _0217BB363D33C1E6106D867759945E60.bin
+- **Xceed.Wpf.Toolkit**: A WPF toolkit extension library.
+- **WPFToolkit.Extended**: Extended WPF Toolkit components.
+
+### _A48A89DA13155DE57D8C54BB68CAB8DF.bin
+- **Fluent**: Likely a Fluent UI or validation library.
+
+### _AFE5EEDAE3B60083E1C695DC70B98D21.bin
+- **System.Windows.Controls.Input.Toolkit**: Input toolkit for WPF.
+
+### _CB38B6C841326DE754BF0DC05C10A1CF.bin
+- **RibbonControlsLibrary**: Ribbon UI controls.
+
+### _E98D81C56989FFB173934CB8A6422982.bin
+- **Icon resources**: Calendar, DataGrid, DatePicker icons.
+
+### _CC9F5F955BEF52CFFC993D9515254257.bin
+- **XML**: Likely configuration or metadata files (e.g., `version.xml`).
+
+## Key Observations
+1. **Dependencies**: The application relies on:
+   - WPF Toolkit extensions (Xceed, RibbonControls)
+   - UI input controls and validation libraries
+   - Icon resources for UI elements
+   - Configuration files (e.g., `version.xml`)
+
+2. **Missing DLLs**: The other DLLs (_6412FC22BB048B3557E16A990AEF9C93.bin, _B45FE804E83C1F937D260BA382F04DE1.bin, _D07EDEC1F6EB4F76806E0ABEC9351943.bin_) do not appear to be .NET assemblies or contain metadata that can be parsed with dnfile.
+
+3. **Next Steps**:
+   - **Phase 2**: Confirm the SQL procedures and CSDL schema align with the application's business logic.
+   - **Phase 3**: Propose a modern stack (e.g., .NET 8 + WPF/WinUI + SQLite) and rebuild the application.
+   - **Check XML**: Extract the `_CC9F5F955BEF52CFFC993D9515254257.bin` file for version/configuration details.
+
+## Phase 1 Summary
+- **Binary Inspection**: Confirmed the application is a WPF + .NET Framework 4.0 application using Entity Framework 4.0.
+- **Tech Stack**: WPF, .NET Framework 4.0, Entity Framework 4.0, SQL Server.
+- **SQL Procedures**: Extracted stored procedures and connection strings.
+- **Dependencies**: Identified UI toolkit dependencies and icon resources.
+
+**Proceed to Phase 2**: Finalize the database schema and business logic.

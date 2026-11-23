@@ -1,0 +1,46 @@
+# EDM Schemas from EngineApp.exe
+
+## SmartpartsModel
+- csdl: SmartpartsModel.csdl
+  - Namespace: smartpartsModel
+  - Alias: Self
+  - Contains tables: Entries, Suppliers, Engines, Invoices, InvoiceLineItems, Locations, Stocks, Users, TransactionTypes
+  - Likely references: SmartpartsEntities
+
+- ssdl: SmartpartsModel.ssdl
+  - XML snippet: <Schema Namespace="smartpartsModel.Store" Alias="Self" Pr
+
+- msl: SmartpartsModel.msl
+  - XML snippet: <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/"
+
+## EngineModel
+- csdl: EngineModel.csdl
+  - Namespace: EnginesModel
+  - Alias: Self
+  - XML snippet: <Schema Namespace="EnginesModel" Alias="Self" xmlns:annot
+
+- ssdl: EngineModel.ssdl
+  - XML snippet: <Schema Namespace="EnginesModel.Store" Alias="Self" Provi
+
+- msl: EngineModel.msl
+  - XML snippet: <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/"
+
+## Resources
+- EngineApp.Properties.Resources.resources
+  - Size: 180 bytes
+- EngineApp.g.resources
+  - Size: 543124 bytes (likely XAML or other resource data)
+
+## Key Findings
+1. The application uses Entity Framework 4.0 with two EDM models:
+   - SmartpartsModel (handles Entries, Suppliers, Engines, Invoices, etc.)
+   - EngineModel (handles Engines, Invoices, Locations, etc.)
+2. The CSDL files define the schema for these models, and the SSDL/msl files provide storage mappings.
+3. The #US heap contains SQL stored procedures and connection strings.
+4. The application is WPF-based with a UI layer using XAML resources.
+
+## Next Steps
+- Parse the CSDL/SSDL/msl files to extract table definitions, relationships, and constraints.
+- Extract SQL stored procedures from the #US heap and match them to the CSDL tables.
+- Check other CAB files for dependencies (e.g., DLLs, icons, or additional resources).
+- Proceed to Phase 2: Database schema and business logic recovery.

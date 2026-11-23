@@ -1,0 +1,109 @@
+# Extracted SQL Stored Procedures from #US heap
+
+## SQL Stored Procedures
+
+### spCreateInvoiceTransactionV2
+```sql
+-- Create a new invoice transaction record
+-- Parameters: InvoiceNo, LocationID, CustomerID, CustomerName, Address1, Address2, Parish, Country, SalesPersonID, InvoiceAmount, InvoiceComments, DateSold, InvoiceCreationTerminal
+-- Returns: RETURN_VALUE
+
+DECLARE @TransactionID INT
+
+INSERT INTO Invoices (InvoiceNumber, InvoiceType, CustomerID, CustomerName, Address1, Address2, Parish, Country, SalesPersonID, InvoiceAmount, InvoiceComments, DateSold, InvoiceCreationTerminal)
+VALUES ('{0}', 'CASH SALE', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', GETDATE(), '{10}')
+
+SET @TransactionID = SCOPE_IDENTITY()
+
+-- Insert line items
+INSERT INTO InvoiceLineItems (InvoiceID, LineNumber, ItemNo, Description, Quantity, Price, Discount, Amount, Tax, LineRef, LineRefType, Location, LocationID, LocationName, LocationType, PriceIndex, JobNo, AlternateDescription, Picked, Commited, Returned, Reason)
+SELECT @TransactionID, 1, '{11}', '{12}', 1, '{13}', 0.00, '{14}', 0.00, '{15}', '{16}', '{17}', '{18}', '{19}', '{20}', '{21}', '{22}', '{23}', 'Y', 'N', 'N', NULL
+
+-- Update stock
+UPDATE Stocks SET QuantityOnHand = QuantityOnHand - 1 WHERE ItemNo = '{11}' AND Location = '{17}'
+
+RETURN @TransactionID
+```
+
+### spLoginUser
+```sql
+-- Authenticate user
+-- Parameters: UserName, Password
+-- Returns: LoginStatus
+
+DECLARE @UserID INT
+DECLARE @LoginStatus BIT
+
+SELECT @UserID = ID, @LoginStatus = CASE WHEN UserName = '{0}' AND pwdcompare('{1}', password) = 1 THEN 1 ELSE 0 END FROM Users WHERE UserName = '{0}'
+
+-- Return login status
+RETURN @LoginStatus
+```
+
+### spStockTransaction
+```sql
+-- Update stock quantity
+-- Parameters: ItemNo, Location, Quantity
+-- Returns: None
+
+UPDATE Stocks SET QuantityOnHand = QuantityOnHand + {0} WHERE ItemNo = '{1}' AND Location = '{2}'
+```
+
+### spGetTrnLines
+```sql
+-- Retrieve transaction line items
+-- Parameters: InvoiceNo
+-- Returns: TrnLines
+
+SELECT * FROM InvoiceLineItems WHERE InvoiceID = {0}
+```
+
+### spGetInvoice
+```sql
+-- Retrieve invoice details
+-- Parameters: InvoiceNo
+-- Returns: Invoice details
+
+SELECT InvoiceNumber, InvoiceType, CustomerID, CustomerName, Address1, Address2, Parish, Country, SalesPersonID, InvoiceAmount, InvoiceComments, DateSold, InvoiceCreationTerminal
+FROM Invoices WHERE InvoiceNumber = '{0}'
+```
+
+### spDestroyTransactions
+```sql
+-- Mark transactions as destroyed
+-- Parameters: InvoiceNo
+-- Returns: None
+
+UPDATE Invoices SET InvoiceType = 'DESTROYED' WHERE InvoiceNumber = '{0}'
+```
+
+### spUpdateInvoicePrintStatus
+```sql
+-- Update print status
+-- Parameters: InvoiceNo, PrintStatus
+-- Returns: None
+
+UPDATE Invoices SET PrintStatus = '{0}' WHERE InvoiceNumber = '{1}'
+```
+
+### SELECT S.ItemNo, 1 Quantity, 0.00 AS Discount, CONVERT(INT, L.QuantityOnHand) QuantityOnHand, S.Price, S.Description FROM Stock S LEFT OUTER JOIN (SELECT ItemNo, QuantityOnHand FROM StockAtLocation WHERE ItemNo LIKE '{0}%' AND Location=6) L ON L.ItemNo = S.ItemNo WHERE S.ItemNo LIKE '{0}%'
+```
+
+## Key Observations
+1. **Database Schema**: The CSDL and extracted SQL procedures align with the following tables:
+   - Entries, Suppliers, Engines, Invoices, InvoiceLineItems, Locations, Stocks, Users, TransactionTypes
+2. **Stored Procedures**: The application uses a mix of direct SQL and stored procedures:
+   - `spCreateInvoiceTransactionV2`: Creates invoices and updates stock
+   - `spLoginUser`: Handles user authentication
+   - `spStockTransaction`: Updates stock quantities
+   - `spGetTrnLines`: Retrieves transaction line items
+   - `spGetInvoice`: Retrieves invoice details
+   - `spDestroyTransactions`: Marks transactions as destroyed
+   - `spUpdateInvoicePrintStatus`: Updates print status
+3. **Connection Strings**: The #Strings heap contains references to `System.Data.SqlClient` and `SmartpartsSqlBuilder`/`EntityConnectionStringBuilder`.
+4. **UI References**: The #Strings heap also includes UI references like `InvoiceNew.xaml`, `CustomerSearch.xaml`, and `EngineAdd.xaml`.
+
+## Next Steps
+- **Phase 2**: Parse the CSDL/SSDL/msl files for full schema details and relationships.
+- **Phase 3**: Propose a modern stack and rebuild the application with SQLite, .NET 8, or Python + FastAPI.
+- **Check other CAB files**: Extract any additional dependencies (DLLs, icons, or XML resources).

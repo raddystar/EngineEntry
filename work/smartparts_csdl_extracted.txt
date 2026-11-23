@@ -1,0 +1,180 @@
+# SmartpartsModel.csdl Extracted Entities and Properties
+
+## Entities
+
+### Entries
+- ID: int
+- EntryType: char
+- ChassisNumber: char
+- EntryNumber: char
+- SupplierID: char
+- ContainerNumber: char
+- C78EntryDate: date
+- DateEntered: date
+
+### Suppliers
+- ID: int
+- SupplierName: char
+- Address1: char
+- Address2: char
+- PostalCode: char
+- City: char
+- Country: char
+- Telephone: char
+- Fax: char
+
+### Engines
+- ID: int
+- EngineNumber: char
+- EntryType: char
+- ChassisNumber: char
+- EntryNumber: char
+- SupplierID: char
+- ContainerNumber: char
+- C78EntryDate: date
+- DateEntered: date
+
+### Invoices
+- ID: int
+- InvoiceNumber: char
+- InvoiceType: char
+- CustomerID: char
+- CustomerName: char
+- Address1: char
+- Address2: char
+- Parish: char
+- Country: char
+- SalesPersonID: char
+- InvoiceAmount: decimal
+- InvoiceComments: nvarchar
+- DateSold: date
+- InvoiceCreationTerminal: char
+- CreatedBy: char
+- CreatedDate: date
+
+### InvoiceLineItems
+- ID: int
+- InvoiceID: int
+- LineNumber: int
+- ItemNo: char
+- Description: nvarchar
+- Quantity: int
+- Price: decimal
+- Discount: decimal
+- Amount: decimal
+- Tax: decimal
+- LineRef: char
+- LineRefType: char
+- Location: char
+- LocationID: int
+- LocationName: char
+- LocationType: char
+- PriceIndex: char
+- JobNo: char
+- AlternateDescription: nvarchar
+- Picked: char
+- Commited: char
+- Returned: char
+- Reason: char
+- ParentID: int
+
+### Locations
+- ID: int
+- LocationName: char
+- LocationType: char
+- LocationTree: char
+- ServerName: char
+- DateLastUpdated: date
+- PostalCode: char
+- City: char
+- Telephone: char
+- Fax: char
+
+### Stocks
+- ID: int
+- ItemNo: char
+- Description: nvarchar
+- Price: decimal
+- Cost: decimal
+- TaxCode: char
+- AlternateItemNo: char
+- SubstituteItemNo: char
+- LastPurchasePrice: decimal
+- QtyOnOrder: int
+- YtdSalesDollar: decimal
+- YtdPurDollar: decimal
+- DateLastPurchased: date
+- DateLastSale: date
+- DeliveryDate: date
+- MaximumDiscount: decimal
+- AutoDiscount: decimal
+- AutoDiscountExpires: date
+- AutoDiscountEffective: date
+- PriceB: decimal
+- PriceC: decimal
+- DescChangesAtSale: char
+- PriceChagesAtSale: char
+- ExRate: decimal
+- Currency: char
+- NonStockItem: char
+- StockLeadTime: int
+
+### Users
+- ID: int
+- UserName: char
+- Password: char
+- LoginStatus: char
+- LoginDate: date
+- UserSessionNo: char
+- PassWord: char
+- FingerPrint: char
+- Last_Updated: date
+- Last_Updated_By: char
+- PinNo: char
+- Zipcode: char
+- CreditLimit: decimal
+- ResellerDiscount: decimal
+- ArBalance: decimal
+- Message: char
+- IsBlocked: char
+- Delayed: char
+- Terms: char
+- LoyaltyCardNo: char
+
+### TransactionTypes
+- ID: int
+- TrnNo: char
+- TrnType: char
+- Transtype: char
+- LocationID: int
+- LocationName: char
+- DateLastUpdated: date
+- CashierSystem: char
+- TerminalId: char
+- IsArTransaction: char
+- IsArPayment: char
+- IsArInvoice: char
+- IsReversalType: char
+- IsaPayment: char
+- IsaCashierPayment: char
+- UID: char
+- UserID: char
+- SalesAgentName: char
+- Telephone_1: char
+- Telephone_2: char
+- Fax_no: char
+- Email: char
+- Cell: char
+- PrimaryContact: char
+
+## Relationships
+
+- Entries → Suppliers (FK_Entries_Suppliers)
+- Engines → Entries (FK_Engines_Entries)
+- Invoices → Customers (FK_Invoices_Customer)
+- Invoices → InvoiceLineItems (FK_Invoices_InvoiceLineItems)
+- InvoiceLineItems → Locations (FK_InvoiceLineItems_Locations)
+- Locations → Locations (LocationTree)
+- Stocks → Locations (FK_Stocks_Locations)
+- Users → Invoices (FK_Users_Invoices)
+- TransactionTypes → Locations (FK_TransactionTypes_Locations)

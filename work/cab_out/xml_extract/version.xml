@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="EngineApp.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+    </sectionGroup>
+  </configSections>
+  <userSettings>
+    <EngineApp.Properties.Settings>
+      <setting name="Username" serializeAs="String">
+        <value>sa</value>
+      </setting>
+      <setting name="Password" serializeAs="String">
+        <value>zhaneen</value>
+      </setting>
+      <setting name="Server" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="UpdateURL" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="WindowsAuthentication" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="InvoiceComments" serializeAs="String">
+        <value>No return after 24Hrs &amp; on correct items•Incorrect parts purchased must be in original condition &amp; are subject to 10% restocking fee•ELECTRICAL PARTS not returnable• No refund without invoice.</value>
+      </setting>
+      <setting name="DefaultPrinter" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="Database" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="UpgradeSetting" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="GCTRate" serializeAs="String">
+        <value>16.5</value>
+      </setting>
+      <setting name="LinesPerPage" serializeAs="String">
+        <value>5</value>
+      </setting>
+    </EngineApp.Properties.Settings>
+  </userSettings>
+  <connectionStrings>
+    <add name="EngineEntities" connectionString="metadata=res://*/EngineModel.csdl|res://*/EngineModel.ssdl|res://*/EngineModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=TEDDY-PC\SQLEXPRESS;initial catalog=Engines;integrated security=True;multipleactiveresultsets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="SmartpartsEntities" connectionString="metadata=res://*/SmartpartsModel.csdl|res://*/SmartpartsModel.ssdl|res://*/SmartpartsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=TEDDY-PC\SQLEXPRESS;initial catalog=smartparts;integrated security=True;multipleactiveresultsets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+</configuration>

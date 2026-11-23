@@ -1,0 +1,10 @@
+﻿bin/
+obj/
+publish/
+*.db
+*.db-wal
+*.db-shm
+*.hash
+db_config.txt
+.vs/
+*.user

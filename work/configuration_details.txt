@@ -1,0 +1,57 @@
+# Configuration Details from EngineApp.exe
+
+## User Settings
+
+### EngineApp.Properties.Settings
+- **Username**: `sa`
+- **Password**: `zhaneen`
+- **Server**: Empty (default: `TEDDY-PC\)SQLEXPRESS`)
+- **UpdateURL**: Empty
+- **WindowsAuthentication**: `False`
+- **InvoiceComments**: Default return policy
+- **DefaultPrinter**: Empty
+- **Database**: Empty
+- **UpgradeSetting**: `True`
+- **GCTRate**: `16.5` (Gross Consumption Tax rate)
+- **LinesPerPage**: `5`
+
+## Connection Strings
+
+### EngineEntities
+- Metadata: `res://*/EngineModel.csdl|res://*/EngineModel.ssdl|res://*/EngineModel.msl`
+- Provider: `System.Data.SqlClient`
+- Connection String:
+  ```
+  data source=TEDDY-PC\SQLEXPRESS;initial catalog=Engines;integrated security=True;multipleactiveresultsets=True;App=EntityFramework
+  ```
+
+### SmartpartsEntities
+- Metadata: `res://*/SmartpartsModel.csdl|res://*/SmartpartsModel.ssdl|res://*/SmartpartsModel.msl`
+- Provider: `System.Data.SqlClient`
+- Connection String:
+  ```
+  data source=TEDDY-PC\SQLEXPRESS;initial catalog=smartparts;integrated security=True;multipleactiveresultsets=True;App=EntityFramework
+  ```
+
+## Key Observations
+1. **Default Database Servers**: The application connects to SQL Server instances named `Engines` and `smartparts` on `TEDDY-PC\SQLEXPRESS`.
+2. **Authentication**: Uses integrated security (Windows authentication).
+3. **Entity Framework**: Both connection strings reference CSDL/SSDL/MSL files embedded in the application.
+4. **User Settings**: The default username is `sa` with password `zhaneen`.
+
+## Phase 2: Database Schema and Business Logic
+- **CSDL/SSDL/msl**: The extracted CSDL files (`EngineModel.csdl`, `SmartpartsModel.csdl`) define the schema for the application's entities.
+- **SQL Procedures**: The #US heap contains stored procedures like `spCreateInvoiceTransactionV2`, `spLoginUser`, etc.
+- **Business Logic**: The application handles invoicing, stock management, user authentication, and reporting.
+
+## Phase 3: Modernization Plan
+- **Tech Stack**: Propose a modern stack such as:
+  - **.NET 8 + WPF/WinUI**: For a native Windows application with SQLite for local storage.
+  - **Python + FastAPI/Tkinter**: For a lightweight alternative with SQLite.
+- **Database**: SQLite for local storage, with SQL Server as an optional backend.
+- **Build**: Generate a standalone Windows .exe using tools like `dotnet publish` or `PyInstaller`.
+
+## Next Steps
+- Confirm the CSDL/SSDL/msl files fully define the schema and relationships.
+- Extract and validate the SQL stored procedures against the schema.
+- Propose a modernization plan and get user confirmation before proceeding to Phase 3.
